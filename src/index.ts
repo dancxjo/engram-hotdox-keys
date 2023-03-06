@@ -23,7 +23,7 @@ const keys: Key[] = [
 
     ...numberSymbols.map((symbol, i) => new Level2Key(`${i}`, symbol)),
     new Level2Key('\'', '(', 'apostrophe'),
-    new Level2Key('"', ')', 'quote'),
+    new Level2Key('\\"', ')', 'quote'),
     new Level2Key(',', ';', 'comma'),
     new Level2Key('.', ':', 'period'),
     new Level2Key('-', '_', 'minus'),
