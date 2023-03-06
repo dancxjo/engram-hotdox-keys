@@ -4,6 +4,6 @@ include <../includes.scad>;
         stem_type="cherry";
         
 $font = "Noto Sans Symbols";
-legend("⎄", [0, 0], 5)
+legend("⎄", [0, 0], 8)
 	1_5uh()
 	key();
