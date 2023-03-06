@@ -1,7 +1,7 @@
 import { Key } from "./Key";
 
 export class Level1Key extends Key {
-    protected fontSize = 6;
+    protected fontSize = 5;
     readonly id: string;
 
     constructor(protected level1: string, id?: string) {

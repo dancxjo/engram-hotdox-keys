@@ -3,6 +3,6 @@ include <../includes.scad>;
         row=3;
         stem_type="cherry";
         
-legend("H", [0, 0], 6)
+legend("H", [0, 0], 5)
 	bump()
 	key();

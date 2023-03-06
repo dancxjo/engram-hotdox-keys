@@ -3,5 +3,5 @@ include <../includes.scad>;
         row=3;
         stem_type="cherry";
         
-legend("I", [0, 0], 6)
+legend("I", [0, 0], 5)
 	key();
