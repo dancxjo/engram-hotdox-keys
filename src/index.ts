@@ -44,9 +44,9 @@ const keys: Key[] = [
     new AlternateFontKey(new PlainSymbolKey("⎇", 'alt')),
     new MiddleKey(new AlternateFontKey(new Level2Key('⎄', '⇮', 'compose1'))),
     new MiddleKey(new AlternateFontKey(new Level2Key('⎄', '⇮', 'compose2'))),
-    new AlternateFontKey(new Level1Key('𝑓₁')),
-    new AlternateFontKey(new Level1Key('𝑓₂')),
-    new AlternateFontKey(new Level1Key('𝑓₃')),
+    new AlternateFontKey(new Level1Key('𝑓₁', 'layer1')),
+    new AlternateFontKey(new Level1Key('𝑓₂', 'layer2')),
+    new AlternateFontKey(new Level1Key('𝑓₃', 'layer3')),
     new PlainSymbolKey('↖', 'home'),
     new PlainSymbolKey('↘', 'end'),
     new PlainSymbolKey('↑', 'up'),
@@ -63,7 +63,6 @@ const keys: Key[] = [
     new PlainSymbolKey('❖', 'super'),
     new PlainSymbolKey('⌘', 'command'),
     new PlainSymbolKey('⌥', 'option'),
-   
 ];
 
 if (!existsSync('./scad')) {

@@ -11,7 +11,7 @@ class Level2Key extends Level1Key_1.Level1Key {
     get transformations() {
         return [
             `legend("${this.level1}", [0, 1], ${this.fontSize})`,
-            `legend("${this.level2}", [0, -1], ${this.fontSize} * 0.8)`
+            `legend("${this.level2}", [0, -1], ${Math.floor(this.fontSize * 0.75)})`
         ];
     }
 }

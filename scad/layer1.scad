@@ -3,6 +3,6 @@ include <../includes.scad>;
         row=3;
         stem_type="cherry";
         
-legend("#", [0, 1], 6)
-	legend("$", [0, -1], 4)
+$font = "Noto Sans Symbols";
+legend("𝑓₁", [0, 0], 6)
 	key();
