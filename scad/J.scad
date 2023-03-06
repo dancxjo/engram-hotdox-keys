@@ -1,0 +1,4 @@
+include <../includes.scad>;
+$font = "Noto Sans";
+legend("J", [0, 0], 6)
+	key();
