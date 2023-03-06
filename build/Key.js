@@ -4,7 +4,12 @@ exports.Key = void 0;
 const fs_1 = require("fs");
 class Key {
     get header() {
-        return `include <../includes.scad>;\n$font = "Noto Sans";`;
+        return `include <../includes.scad>;
+        $font = "Noto Sans";
+        key_profile="dsa";
+        row=3;
+        stem_type="cherry";
+        `;
     }
     get coda() {
         return ``;

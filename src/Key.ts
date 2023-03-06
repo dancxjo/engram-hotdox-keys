@@ -5,7 +5,12 @@ export abstract class Key {
     abstract transformations: string[];
 
     get header(): string {
-        return `include <../includes.scad>;\n$font = "Noto Sans";`;
+        return `include <../includes.scad>;
+        $font = "Noto Sans";
+        key_profile="dsa";
+        row=3;
+        stem_type="cherry";
+        `;
     }
     
     get coda(): string {
