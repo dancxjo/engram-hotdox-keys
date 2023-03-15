@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "watch": "tsc -w",
-    "start": "node build/index.js && rm -rf ./sdl && mkdir sdl && for f in ./scad/*.scad; do openscad-nightly -o stl/$(basename $f .scad).stl $f; done",
+    "start": "rm -rf ./stl && rm -rf ./scad && node build/index.js && mkdir stl && for f in ./scad/*.scad; do openscad-nightly -o stl/$(basename $f .scad).stl $f; done",
     "prestart": "npm run build"
   },
   "author": "Travis Reed (@dancxjo)",
