@@ -14,4 +14,9 @@ export class Level1Key extends Key {
             `legend("${this.level1}", [0, 0], ${this.fontSize})`
         ];
     }
+
+    size(size: number): Key {
+        this.fontSize = size;
+        return this;
+    }
 }

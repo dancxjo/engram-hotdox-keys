@@ -3,6 +3,6 @@ $stem_type="rounded_cherry";
 $font="DejaVu Sans:style=bold";
 
 oem_row(0)
-	legend("⌫", [0, 0], 8)
+	legend("⌫", [0, 0], 5)
 	2uh()
 	key();

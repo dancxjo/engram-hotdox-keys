@@ -7,10 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "watch": "tsc -w",
-    "clean": "rm -rf ./stl && rm -rf ./scad",
+    "clean": "rm -rf ./stl && rm -rf ./scad && rm -rf ./stl_by_row",
     "generate:scad": "node build/index.js",
     "generate:stl": "mkdir -p stl && for f in ./scad/*.scad; do echo $f; openscad-nightly -o stl/$(basename $f .scad).stl $f; done",
-    "start": "",
+    "sort": "./sort.sh",
+    "start": "npm run clean && npm run generate:scad && npm run generate:stl && npm run sort",
     "prestart": "npm run build"
   },
   "author": "Travis Reed (@dancxjo)",
