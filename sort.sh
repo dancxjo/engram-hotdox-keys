@@ -31,7 +31,7 @@ cd ..
 
 mkdir -p 0
 cd 0
-ln -sf ../../stl/{space,alt,altgr,backspace,command,control,delete,end,escape,helm_tall,insert,return,super}.stl ./
+ln -sf ../../stl/{space,alt,altgr,backspace,command,control,delete,end,escape,helm_tall,insert,option,return,super}.stl ./
 cd ..
 
 cd $WHEREAMI
