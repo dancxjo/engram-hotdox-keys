@@ -3,14 +3,12 @@ import { writeFileSync } from 'fs';
 export abstract class Key {
     abstract id: string;
     abstract transformations: string[];
+    abstract row: number;
 
     get header(): string {
         return `include <../../KeyV2/includes.scad>;
-        key_profile="dsa";
-        row=0;
-        stem_type="cherry";
-        inset_legend_depth=1;
-        `;
+$stem_type="rounded_cherry";
+$font="DejaVu Sans:style=bold";\n`;
     }
     
     get coda(): string {
@@ -21,6 +19,7 @@ export abstract class Key {
         return [
             this.header, 
             [
+                `oem_row(${this.row})`,
                 ...this.transformations, 
                 'key();'
             ].join('\n\t'), 

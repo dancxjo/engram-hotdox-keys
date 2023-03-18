@@ -21,5 +21,9 @@ export class TransformedKey extends Key {
     
     get coda(): string {
         return this.base.coda;
+    }    
+
+    get row(): number {
+        return this.base.row;
     }
 }

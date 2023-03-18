@@ -1,10 +1,9 @@
 include <../../KeyV2/includes.scad>;
-        key_profile="dsa";
-        row=0;
-        stem_type="cherry";
-        inset_legend_depth=1;
-        
-legend("[", [0, 1], 5)
-	legend("{", [0, -1], 3)
+$stem_type="rounded_cherry";
+$font="DejaVu Sans:style=bold";
+
+oem_row(1)
+	legend("[", [-0.4, 1], 5)
+	legend("{", [-0.4, -1], 4)
 	1_5u()
 	key();
