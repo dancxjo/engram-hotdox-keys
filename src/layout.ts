@@ -16,7 +16,7 @@ const row4 = 'GXJKRMFP'.split('');
 const numberSymbols = '*|=~+<>^&%'.split('');
 
 const bottomRow = 5;
-const thumbKeyRow = 0;
+const thumbKeyRow = 5;
 const tallMiddleKeyRow = 0;
 
 export const keys: Key[] = [
