@@ -37,7 +37,7 @@ const keys: Key[] = [
     new Level2Key('-', '_', 4, 'minus'),
     new Level2Key('?', '!', 4, 'question'),
     new Level2Key('/', '\\\\', bottomRow, 'slash'),
-    new Level2Key('`', '@', bottomRow, 'backtick'),
+    new Level2Key('@', '`', bottomRow, 'at'),
     new Level2Key('#', '$', bottomRow, 'hash'),
     new Spacebar(thumbKeyRow),
     new ExtraTallKey(new AlternateFontKey(new PlainSymbolKey("⎈", thumbKeyRow, 'helm_tall'))),
