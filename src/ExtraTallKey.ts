@@ -5,7 +5,7 @@ export class ExtraTallKey extends TransformedKey {
     constructor(protected base: Key) {
         super(base, [
             "2uh()",
-            "veritcally_stabilized(type=\"cherry_stabilizer\")"
+            "stabilized(type=\"cherry_stabilizer\", veritcal=true)",
         ]);
     }
 }
