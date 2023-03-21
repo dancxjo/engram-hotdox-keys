@@ -47,10 +47,10 @@ export const keys: Key[] = [
     new Level2Key('?', '!', 4, 'question'),
 
     // Middle keys
-    new MiddleKey(new Level2Key('/', '\\\\', tallMiddleKeyRow, 'slash')),
-    new MiddleKey(new Level2Key('@', '`', tallMiddleKeyRow, 'at')),
-    new MiddleKey(new Level2Key('#', '$', tallMiddleKeyRow, 'hash')),
-    new MiddleKey(new AlternateFontKey(new PlainSymbolKey('⎙', tallMiddleKeyRow, 'prscr'))),
+    new MiddleKey(new Level2Key('/', '\\\\', 4, 'slash')),
+    new MiddleKey(new Level2Key('@', '`', 2, 'at')),
+    new MiddleKey(new Level2Key('#', '$', 2, 'hash')),
+    new MiddleKey(new AlternateFontKey(new PlainSymbolKey('⎙', 4, 'prscr'))),
 
     // Thumb keys (extra tall)
     new Spacebar(thumbKeyRow),
