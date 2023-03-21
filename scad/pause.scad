@@ -3,6 +3,8 @@ $stem_type="rounded_cherry";
 $inset_legend_depth = 4;
 $font="DejaVu Sans:style=bold";
 
-sa_row(3)
-	legend("E", [0, 0], 5)
+$font = "Noto Sans Symbols:style=bold";
+sa_row(1)
+	legend("⎉", [-0.4, 1], 5)
+	legend("⎊", [-0.4, -1], 4)
 	key();

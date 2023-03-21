@@ -7,11 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "watch": "tsc -w",
-    "clean": "rm -rf ./stl && rm -rf ./scad && rm -rf ./stl_by_row",
-    "generate:scad": "node build/index.js",
-    "generate:stl": "mkdir -p stl && for f in ./scad/*.scad; do echo $f; openscad-nightly -o stl/$(basename $f .scad).stl $f; done",
-    "sort": "./sort.sh",
-    "start": "npm run clean && npm run generate:scad && npm run generate:stl && npm run sort",
+    "clean": "rm -rf ./stl && rm -rf ./scad && rm -rf ./rows",
+    "generate": "node build/index.js",
+    "start": "npm run clean && npm run generate",
     "prestart": "npm run build"
   },
   "author": "Travis Reed (@dancxjo)",
@@ -19,5 +17,8 @@
   "devDependencies": {
     "@types/node": "^18.14.6",
     "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "mkdirp": "^2.1.5"
   }
 }
