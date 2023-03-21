@@ -77,10 +77,10 @@ export const keys: Key[] = [
     new SideKey(new Level2Key(']', '}', 1, 'bracket_right')),
     
     // Bottom row
-    new Level2Key('ƒ₁', 'qw', bottomRow, 'layer1'),
-    new Level2Key('ƒ₂', 'en', bottomRow, 'layer2'),
-    new Level2Key('ƒ₁', 'qw', bottomRow, 'layer1_right'),
-    new Level2Key('ƒ₂', 'en', bottomRow, 'layer2_right'),
+    new Level1Key('ƒ₁', bottomRow, 'layer1'),
+    new Level1Key('ƒ₂', bottomRow, 'layer2'),
+    new Level2Key('qwerty', 'engram', bottomRow, 'qwerty').size(2),
+    new Level1Key('ƒ₃', bottomRow, 'layer3'),
 
     // Two helm keys (opposite pinkies)
     new AlternateFontKey(new PlainSymbolKey('⎈', bottomRow, 'helm')),
@@ -92,7 +92,7 @@ export const keys: Key[] = [
 
     // Two alt keys (opposite thumbs)
     new AlternateFontKey(new PlainSymbolKey("⎇", bottomRow, 'alt')),
-    new AlternateFontKey(new PlainSymbolKey("⇮", bottomRow, 'altgr')),
+    new PlainSymbolKey("⇮", bottomRow, 'altgr'),
 ];
 
 keys.sort((a, b) => a.row - b.row || a.id.localeCompare(b.id));

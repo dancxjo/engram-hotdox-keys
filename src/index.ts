@@ -1,6 +1,6 @@
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
-import { keys } from './layout'
+import processKeys from "./process";
 
 const options = yargs(hideBin(process.argv))
     .options('match', {
@@ -10,11 +10,9 @@ const options = yargs(hideBin(process.argv))
     })
     .parseSync();
 
-const pattern = options.match ? new RegExp(options.match) : null;
-
-for (const key of keys) {
-    if (!pattern || pattern.test(key.id) === true) {
-        key.writeScadFile();
-        key.convertToStl();
+const pattern = options.match ? new RegExp(options.match) : undefined;
+processKeys(pattern).catch((errors: Error[]) => {
+    for (const error of errors) {
+        console.error(error);
     }
-}
+});
