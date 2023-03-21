@@ -4,6 +4,10 @@ import { TransformedKey } from "./TransformedKey";
 
 export class Spacebar extends ExtraTallKey {
     constructor(row = 5) {
-        super(new TransformedKey(new PlainSymbolKey("␣", row, 'space'), ["inverted()"]));
+        super(new PlainSymbolKey("␣", row, 'space'));
+    }
+
+    get header() {
+        return super.header + '\n$dish_type = "cylindrical";\n';
     }
 }
