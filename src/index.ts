@@ -1,6 +1,6 @@
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
-import processKeys from "./process";
+import { processKeys, processKeysSync } from "./process";
 import { Key } from "./Key";
 
 const options = yargs(hideBin(process.argv))
@@ -14,12 +14,23 @@ const options = yargs(hideBin(process.argv))
         type: 'boolean',
         description: 'Enable rounding (slows down conversion time drastically)'
     })
+    .options('async', {
+        alias: 'a',
+        type: 'boolean',
+        default: false,
+        description: 'Run conversion asynchronously'
+    })
     .parseSync();
 
 Key.rounding = options.rounding ?? false;
 const pattern = options.match ? new RegExp(options.match) : undefined;
-processKeys(pattern).catch((errors: Error[]) => {
-    for (const error of errors) {
-        console.error(error);
-    }
-});
+
+if (!options.async) {
+    processKeysSync(pattern);
+} else {
+    processKeys(pattern).catch((errors: Error[]) => {
+        for (const error of errors) {
+            console.error(error);
+        }
+    });
+}

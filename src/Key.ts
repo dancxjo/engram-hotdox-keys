@@ -1,6 +1,6 @@
 import { existsSync, linkSync, writeFileSync } from 'fs';
 import { mkdirpSync as mkdirp } from "mkdirp";
-import { ChildProcess, exec } from 'child_process';
+import { ChildProcess, exec, execSync } from 'child_process';
 
 export abstract class Key {
     static rounding = false;
@@ -27,9 +27,9 @@ $font="DejaVu Sans:style=bold";\n`;
         ];
 
         if (Key.rounding) {
-            transformations.unshift('rounding()');
+            transformations.unshift('rounded()');
         }
-        
+
         return [
             this.header,
             transformations.join('\n\t'),
@@ -42,9 +42,14 @@ $font="DejaVu Sans:style=bold";\n`;
         writeFileSync(`./scad/${this.id}.scad`, this.getScad());
     }
 
+    convertSync(): void {
+        mkdirp('./stl');
+        execSync(`openscad-nightly -o ./stl/${this.id}.stl ./scad/${this.id}.scad`, {stdio : 'pipe' });
+    }
+
     convertToStl(callback: () => unknown): ChildProcess {
         mkdirp('./stl');
-        const child = exec(`openscad-nightly -o ./stl/${this.id}.stl ./scad/${this.id}.scad`, (err, stdOut, stdErr) => {
+        return exec(`openscad-nightly -o ./stl/${this.id}.stl ./scad/${this.id}.scad`, (err, stdOut, stdErr) => {
             if (!err) {
                 mkdirp(`./rows/${this.row}`);
                 if (!existsSync('./rows/${this.row}/${this.id}.stl')) {
@@ -53,7 +58,6 @@ $font="DejaVu Sans:style=bold";\n`;
             }
             callback();
         });
-        return child;
     }
 }
 
