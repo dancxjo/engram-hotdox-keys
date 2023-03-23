@@ -77,9 +77,9 @@ export const keys: Key[] = [
     
     // Bottom row
     new Level1Key('ƒ₁', Row.Mods, 'layer1'),
-    new Level1Key('ƒ₂', Row.Mods, 'layerRow.AboveHome'),
+    new Level1Key('ƒ₂', Row.Mods, 'layer2'),
     new Level1Key('qw', Row.Mods, 'qwerty').size(4),
-    new Level1Key('ƒ₃', Row.Mods, 'layerRow.Home'),
+    new Level1Key('ƒ₃', Row.Mods, 'layer3'),
 
     // Two helm keys (opposite pinkies)
     new AlternateFontKey(new PlainSymbolKey('⎈', Row.Mods, 'helm')),
