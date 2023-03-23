@@ -1,4 +1,4 @@
-import { existsSync, linkSync, writeFileSync } from 'fs';
+import { linkSync, writeFileSync, lstatSync } from 'fs';
 import { mkdirpSync as mkdirp } from "mkdirp";
 import { ChildProcess, exec, execSync } from 'child_process';
 
@@ -43,25 +43,25 @@ $font="DejaVu Sans:style=bold";\n`;
     }
 
     private link(): void {
-	try {
+        try {
             mkdirp(`./rows/${this.row}`);
-	    if (!existsSync('./rows/${this.row}/${this.id}.stl')) {
-    	        linkSync(`./stl/${this.id}.stl`, `./rows/${this.row}/${this.id}.stl`);
-    	    }
-	} catch (e) {
-	    console.error(`Couldn't link ${this.row}/${this.id}`, e);
-	}
+            if (!lstatSync('./rows/${this.row}/${this.id}.stl')) {
+                linkSync(`./stl/${this.id}.stl`, `./rows/${this.row}/${this.id}.stl`);
+            }
+        } catch (e) {
+            // console.error(`Couldn't link ${this.row}/${this.id}`, e);
+        }
 
     }
 
     convertSync(): void {
-	try {
+        try {
             mkdirp('./stl');
-	    execSync(`openscad-nightly -o ./stl/${this.id}.stl ./scad/${this.id}.scad`, {stdio : 'pipe' });
-    	    this.link();
-	} catch (e) {
-	    console.error(`Couldn't convert ${this.row}/${this.id}`, e);
-	}
+            execSync(`openscad-nightly -o ./stl/${this.id}.stl ./scad/${this.id}.scad`, { stdio: 'pipe' });
+            this.link();
+        } catch (e) {
+            console.error(`Couldn't convert ${this.row}/${this.id}`, e);
+        }
     }
 
     convertToStl(callback: () => unknown): ChildProcess {
@@ -70,8 +70,8 @@ $font="DejaVu Sans:style=bold";\n`;
             if (!err) {
                 this.link();
             } else {
-		console.error(`Couldn't convert ${this.row}/${this.id}`, err);
-	    }
+                console.error(`Couldn't convert ${this.row}/${this.id}`, err);
+            }
             callback();
         });
     }

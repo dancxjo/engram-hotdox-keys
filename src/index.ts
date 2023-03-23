@@ -4,18 +4,18 @@ import { processKeys, processKeysSync } from "./process";
 import { Key } from "./Key";
 
 const options = yargs(hideBin(process.argv))
-    .options('match', {
+    .option('match', {
         alias: 'm',
         type: 'string',
         description: 'Only convert keys that match the given pattern'
     })
-    .options('rounding', {
+    .option('rounding', {
         alias: 'r',
         type: 'boolean',
         description: 'Enable rounding (slows down conversion time drastically)'
     })
-    .options('async', {
-        alias: 'a',
+    .option('sync', {
+        alias: 's',
         type: 'boolean',
         default: false,
         description: 'Run conversion asynchronously'
@@ -25,7 +25,7 @@ const options = yargs(hideBin(process.argv))
 Key.rounding = options.rounding ?? false;
 const pattern = options.match ? new RegExp(options.match) : undefined;
 
-if (!options.async) {
+if (options.sync) {
     processKeysSync(pattern);
 } else {
     processKeys(pattern).catch((errors: Error[]) => {
