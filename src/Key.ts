@@ -1,12 +1,13 @@
 import { linkSync, writeFileSync, lstatSync } from 'fs';
 import { mkdirpSync as mkdirp } from "mkdirp";
 import { ChildProcess, exec, execSync } from 'child_process';
+import { Row, rowToNumber } from './Row';
 
 export abstract class Key {
     static rounding = false;
     abstract id: string;
     abstract transformations: string[];
-    abstract row: number;
+    abstract row: Row;
     get header(): string {
         return `include <../../KeyV2/includes.scad>;
 $stem_type="rounded_cherry";
@@ -21,7 +22,7 @@ $font="DejaVu Sans:style=bold";\n`;
     getScad(): string {
 
         const transformations = [
-            `sa_row(${this.row})`,
+            `sa_row(${rowToNumber(this.row)})`,
             ...this.transformations,
             'key();'
         ];

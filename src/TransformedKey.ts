@@ -1,4 +1,5 @@
 import { Key } from "./Key";
+import { Row } from "./Row";
 
 export class TransformedKey extends Key {
     readonly id: string;
@@ -23,7 +24,7 @@ export class TransformedKey extends Key {
         return this.base.coda;
     }    
 
-    get row(): number {
+    get row(): Row {
         return this.base.row;
     }
 }

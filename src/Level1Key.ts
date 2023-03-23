@@ -1,10 +1,11 @@
 import { Key } from "./Key";
+import { Row } from "./Row";
 
 export class Level1Key extends Key {
     protected fontSize = 5;
     readonly id: string;
 
-    constructor(protected level1: string, public row = 0, id?: string) {
+    constructor(protected level1: string, public row = Row.Unknown, id?: string) {
         super();
         this.id = id || level1;
     }

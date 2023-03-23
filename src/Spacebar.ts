@@ -1,9 +1,10 @@
 import { ExtraTallKey } from "./ExtraTallKey";
 import { PlainSymbolKey } from "./PlainSymbolKey";
+import { Row } from "./Row";
 import { TransformedKey } from "./TransformedKey";
 
 export class Spacebar extends ExtraTallKey {
-    constructor(row = 5) {
+    constructor(row: Row = Row.Thumbs) {
         super(new TransformedKey(new PlainSymbolKey("␣", row, 'space'), ['inverted()']));
     }
 

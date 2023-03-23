@@ -1,7 +1,8 @@
 import { Level1Key } from "./Level1Key";
+import { Row } from "./Row";
 
 export class Level2Key extends Level1Key {
-    constructor(protected level1: string, protected level2: string, row = 0, id?: string) {
+    constructor(protected level1: string, protected level2: string, row = Row.Unknown, id?: string) {
         super(level1, row, id);
     }
 
