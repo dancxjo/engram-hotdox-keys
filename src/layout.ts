@@ -79,7 +79,7 @@ export const keys: Key[] = [
     // Bottom row
     new Level1Key('ƒ₁', bottomRow, 'layer1'),
     new Level1Key('ƒ₂', bottomRow, 'layer2'),
-    new Level2Key('qwerty', 'engram', bottomRow, 'qwerty').size(2),
+    new Level1Key('qw', bottomRow, 'qwerty').size(4),
     new Level1Key('ƒ₃', bottomRow, 'layer3'),
 
     // Two helm keys (opposite pinkies)

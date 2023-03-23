@@ -3,6 +3,7 @@ import { mkdirpSync as mkdirp } from "mkdirp";
 import { ChildProcess, exec } from 'child_process';
 
 export abstract class Key {
+    static rounding = false;
     abstract id: string;
     abstract transformations: string[];
     abstract row: number;
@@ -18,13 +19,20 @@ $font="DejaVu Sans:style=bold";\n`;
     }
 
     getScad(): string {
+
+        const transformations = [
+            `sa_row(${this.row})`,
+            ...this.transformations,
+            'key();'
+        ];
+
+        if (Key.rounding) {
+            transformations.unshift('rounding()');
+        }
+        
         return [
             this.header,
-            [
-                `sa_row(${this.row})`,
-                ...this.transformations,
-                'key();'
-            ].join('\n\t'),
+            transformations.join('\n\t'),
             this.coda
         ].join('\n');
     }

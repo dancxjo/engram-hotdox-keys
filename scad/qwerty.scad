@@ -4,6 +4,5 @@ $inset_legend_depth = 4;
 $font="DejaVu Sans:style=bold";
 
 sa_row(5)
-	legend("qwerty", [-0.4, 1], 2)
-	legend("engram", [-0.4, -1], 1)
+	legend("qw", [0, 0], 4)
 	key();

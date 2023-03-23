@@ -5,7 +5,11 @@ export class ExtraTallKey extends TransformedKey {
     constructor(protected base: Key) {
         super(base, [
             "2uh()",
-            "stabilized(type=\"cherry_stabilizer\", veritcal=true)",
+            `stabilized(vertical=true, type="cherry_stabilizer")`,
         ]);
+    }
+
+    get header(): string {
+        return this.base.header.replace(`"cherry"`, `"rounded-cherry"`);
     }
 }

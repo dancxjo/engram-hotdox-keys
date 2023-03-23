@@ -6,5 +6,5 @@ $font="DejaVu Sans:style=bold";
 sa_row(5)
 	legend("⌫", [0, 0], 5)
 	2uh()
-	stabilized(type="cherry_stabilizer", veritcal=true)
+	stabilized(vertical=true, type="cherry_stabilizer")
 	key();
