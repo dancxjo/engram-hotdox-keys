@@ -45,9 +45,7 @@ $font="DejaVu Sans:style=bold";\n`;
     private link(): void {
         try {
             mkdirp(`./rows/${this.row}`);
-            if (!lstatSync('./rows/${this.row}/${this.id}.stl')) {
-                linkSync(`./stl/${this.id}.stl`, `./rows/${this.row}/${this.id}.stl`);
-            }
+            linkSync(`./stl/${this.id}.stl`, `./rows/${this.row}/${this.id}.stl`);
         } catch (e) {
             // console.error(`Couldn't link ${this.row}/${this.id}`, e);
         }
