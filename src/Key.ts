@@ -43,17 +43,25 @@ $font="DejaVu Sans:style=bold";\n`;
     }
 
     private link(): void {
-        mkdirp(`./rows/${this.row}`);
-        if (!existsSync('./rows/${this.row}/${this.id}.stl')) {
-            linkSync(`./stl/${this.id}.stl`, `./rows/${this.row}/${this.id}.stl`);
-        }
+	try {
+            mkdirp(`./rows/${this.row}`);
+	    if (!existsSync('./rows/${this.row}/${this.id}.stl')) {
+    	        linkSync(`./stl/${this.id}.stl`, `./rows/${this.row}/${this.id}.stl`);
+    	    }
+	} catch (e) {
+	    console.error(`Couldn't link ${this.row}/${this.id}`, e);
+	}
 
     }
 
     convertSync(): void {
-        mkdirp('./stl');
-        execSync(`openscad-nightly -o ./stl/${this.id}.stl ./scad/${this.id}.scad`, {stdio : 'pipe' });
-        this.link();
+	try {
+            mkdirp('./stl');
+	    execSync(`openscad-nightly -o ./stl/${this.id}.stl ./scad/${this.id}.scad`, {stdio : 'pipe' });
+    	    this.link();
+	} catch (e) {
+	    console.error(`Couldn't convert ${this.row}/${this.id}`, e);
+	}
     }
 
     convertToStl(callback: () => unknown): ChildProcess {
@@ -61,7 +69,9 @@ $font="DejaVu Sans:style=bold";\n`;
         return exec(`openscad-nightly -o ./stl/${this.id}.stl ./scad/${this.id}.scad`, (err, stdOut, stdErr) => {
             if (!err) {
                 this.link();
-            }
+            } else {
+		console.error(`Couldn't convert ${this.row}/${this.id}`, err);
+	    }
             callback();
         });
     }

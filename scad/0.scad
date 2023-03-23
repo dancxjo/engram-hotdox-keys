@@ -6,5 +6,5 @@ $font="DejaVu Sans:style=bold";
 rounded()
 	sa_row(1)
 	legend("0", [-0.4, 1], 5)
-	legend("*", [-0.4, -1], 4)
+	legend("*", [-0.4, -0.9], 3)
 	key();

@@ -8,7 +8,7 @@ export class Level2Key extends Level1Key {
     get transformations(): string[] {
         return [
             `legend("${this.level1}", [-0.4, 1], ${this.fontSize})`,
-            `legend("${this.level2}", [-0.4, -1], ${Math.floor(this.fontSize * 0.9)})`
+            `legend("${this.level2}", [-0.4, -0.9], ${Math.floor(this.fontSize * 0.75)})`
         ];
     }
 }

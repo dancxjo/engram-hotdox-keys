@@ -73,8 +73,8 @@ export const keys: Key[] = [
     new SideKey(new PlainSymbolKey("⇧", 4, 'shift_pseudo_right')),
     new SideKey(new Level2Key("⇥", '⇤', 2, 'tab')),
     new SideKey(new PlainSymbolKey("⇬", 3, 'capslock')),
-    new SideKey(new Level2Key('[', '{', 1, 'bracket_left')),
-    new SideKey(new Level2Key(']', '}', 1, 'bracket_right')),
+    new SideKey(new Level2Key('[', '{', 1, 'bracket_left').size(4)),
+    new SideKey(new Level2Key(']', '}', 1, 'bracket_right').size(4)),
     
     // Bottom row
     new Level1Key('ƒ₁', bottomRow, 'layer1'),
