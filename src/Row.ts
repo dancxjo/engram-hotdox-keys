@@ -10,12 +10,12 @@ export enum Row {
 
 export function rowToNumber(row: Row): number {
     switch(row) {
-        case Row.Numbers: return 1;
-        case Row.AboveHome: return 2;
-        case Row.Home: return 3;
-        case Row.BelowHome: return 4;
-        case Row.Mods: return 5;
-        case Row.Thumbs: return 5;
-        default: return 0;
+        case Row.Numbers: return 0;
+        case Row.AboveHome: return 1;
+        case Row.Home: return 2;
+        case Row.BelowHome: return 3;
+        case Row.Mods: return 4;
+        case Row.Thumbs: return 4;
+        default: return 5;
     }
 }

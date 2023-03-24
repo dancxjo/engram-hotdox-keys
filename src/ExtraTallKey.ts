@@ -6,6 +6,7 @@ export class ExtraTallKey extends TransformedKey {
         super(base, [
             "2uh()",
             `stabilized(vertical=true, type="cherry_stabilizer")`,
+            "rotated()",
         ]);
     }
 }

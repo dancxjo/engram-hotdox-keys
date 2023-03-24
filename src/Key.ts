@@ -10,7 +10,7 @@ export abstract class Key {
     abstract row: Row;
     get header(): string {
         return `include <../../KeyV2/includes.scad>;
-$stem_type="rounded_cherry";
+$stem_type="box_cherry";
 $inset_legend_depth = 4;
 $font="DejaVu Sans:style=bold";\n`;
     }
@@ -23,6 +23,7 @@ $font="DejaVu Sans:style=bold";\n`;
 
         const transformations = [
             `sa_row(${rowToNumber(this.row)})`,
+            `bar_support()`,
             ...this.transformations,
             'key();'
         ];
