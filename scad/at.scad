@@ -5,6 +5,6 @@ $font="DejaVu Sans:style=bold";
 
 sa_row(2)
 	legend("@", [-0.4, 1], 5)
-	legend("`", [-0.4, -0.9], 4)
+	legend("`", [-0.4, -0.9], 6)
 	1_5uh()
 	key();

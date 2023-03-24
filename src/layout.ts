@@ -34,7 +34,7 @@ export const keys: Key[] = [
 
     // Row Row.Numbers
     ...numberSymbols.map((symbol, i) => new Level2Key(`${i}`, symbol, Row.Numbers)),
-    new Level2Key('⌃', '⌘', Row.Numbers, 'helm_swap'),     // Swap control and command for the helm key
+    new Level2Key('⌃', '⌘', Row.Numbers, 'helm_swap').size(7),     // Swap control and command for the helm key
     new AlternateFontKey(new Level2Key('⎉', '⎊', Row.Numbers, 'pause')),         // Pause and break
     
     // Central punctuation
@@ -42,12 +42,12 @@ export const keys: Key[] = [
     new Level2Key('\\"', ')', Row.AboveHome, 'quote'),
     new Level2Key(',', ';', Row.Home, 'comma'),
     new Level2Key('.', ':', Row.Home, 'period'),
-    new Level2Key('-', '_', Row.BelowHome, 'minus'),
+    new Level2Key('-', '_', Row.BelowHome, 'minus').size(6), // Glyphs are faint
     new Level2Key('?', '!', Row.BelowHome, 'question'),
 
     // Middle keys
     new MiddleKey(new Level2Key('/', '\\\\', Row.BelowHome, 'slash')),
-    new MiddleKey(new Level2Key('@', '`', Row.AboveHome, 'at')),
+    new MiddleKey(new Level2Key('@', '`', Row.AboveHome, 'at').size2(6)), // Backtick is too light to be seen
     new MiddleKey(new Level2Key('#', '$', Row.AboveHome, 'hash')),
     new MiddleKey(new AlternateFontKey(new PlainSymbolKey('⎙', Row.BelowHome, 'prscr'))),
 

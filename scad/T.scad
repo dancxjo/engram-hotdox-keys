@@ -5,5 +5,5 @@ $font="DejaVu Sans:style=bold";
 
 sa_row(3)
 	legend("T", [0, 0], 5)
-	legend("↓", [0.75, 1], 3)
+	legend("↓", [0.8, 1.1], 4.5)
 	key();
