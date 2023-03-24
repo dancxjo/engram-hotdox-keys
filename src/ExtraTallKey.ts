@@ -8,8 +8,4 @@ export class ExtraTallKey extends TransformedKey {
             `stabilized(vertical=true, type="cherry_stabilizer")`,
         ]);
     }
-
-    get header(): string {
-        return this.base.header.replace(`"cherry"`, `"rounded-cherry"`);
-    }
 }
