@@ -26,6 +26,7 @@ export async function processKeys(inclusionPattern: RegExp = /.+/, batchSize = 5
     const errors: Error[] = [];
     const jobs: { [key: string]: (() => Promise<void>) } = {};
     const jobQueue: { [key: string]: Promise<void> } = {};
+    let converted = 0;
 
     const bars = new MultiBar({
         clearOnComplete: false,
@@ -42,29 +43,32 @@ export async function processKeys(inclusionPattern: RegExp = /.+/, batchSize = 5
         scad.update(i, { task: `${key.id}.scad` })
         key.writeScadFile();
         scad.increment();
-        stl.update(0);
+        stl.update(0, {
+            task: `Preparing ${key.id}`,
+            jobsInQueue: Object.keys(jobQueue).length,
+            jobsLeft: Object.keys(jobs).length,
+        });
         jobs[key.id] = (async () => {
             try {
-                const progress = stl.getProgress();
-                stl.update(progress, {
+                stl.update(converted, {
                     task: `Converting ${key.id}...`,
                 });
                 await key.convert();
-                stl.increment({
-                    task: `Finished ${key.id}.stl`,
-                });
                 delete jobQueue[key.id];
             } catch (e) {
                 errors.push(e instanceof Error ? e : new Error(JSON.stringify(e)));
             }
+            converted++;
+            stl.update(converted, {
+                task: `Finished ${key.id}.stl`,
+            });
         })
     }
 
     const timer = setInterval(() => {
         const jobsLeft = Object.keys(jobs).length;
         const jobsInQueue = Object.keys(jobQueue).length;
-        const progress = stl.getProgress();
-        stl.update(progress, {
+        stl.update(converted, {
             jobsInQueue,
             jobsLeft,
         });
