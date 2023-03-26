@@ -5,5 +5,5 @@ $font="NotoSansSymbols2:style=Bold";
 box_cherry(0.5)
 	dsa_row(4)
 	bar_support()
-	legend("⌦", [0, 0], 5)
+	legend("⌦", [0, 0], 8)
 	key();

@@ -54,7 +54,7 @@ export const keys: Key[] = [
   // Thumb keys (extra tall)
   new Spacebar(Row.Thumbs),
   new ExtraTallKey(new PlainSymbolKey("↵", Row.Thumbs, "return")),
-  new ExtraTallKey(new PlainSymbolKey("⌫", Row.Thumbs, "backspace").size(5)), // Glyph is quite large
+  new ExtraTallKey(new PlainSymbolKey("⌫", Row.Thumbs, "backspace").setFont('NotoSansSymbols2:style=bold')), // Glyph is quite large
   new ExtraTallKey(new PlainSymbolKey("⎋", Row.Thumbs, "escape")),
 
   // Thumb keys (normal height)
@@ -64,7 +64,7 @@ export const keys: Key[] = [
   new PlainSymbolKey("⇟", Row.Thumbs, "pagedown"),
   new PlainSymbolKey("↖", Row.Thumbs, "home"),
   new PlainSymbolKey("↘", Row.Thumbs, "end"),
-  new PlainSymbolKey("⌦", Row.Thumbs, "delete").size(5), // Glyph is quite large
+  new PlainSymbolKey("⌦", Row.Thumbs, "delete").setFont('NotoSansSymbols2:style=bold'),
   new PlainSymbolKey("⎀", Row.Thumbs, "insert"),
   // Side keys
   new SideKey(new PlainSymbolKey("⇧", Row.BelowHome, "shift_pseudo_left")),

@@ -1,11 +1,11 @@
 include <../../KeyV2/includes.scad>;
 $inset_legend_depth = 0.97;
-$font="DejaVu Sans:style=Bold";
+$font="NotoSansSymbols2:style=bold";
 
 box_cherry(0.5)
 	dsa_row(4)
 	bar_support()
-	legend("⌫", [0, 0], 5)
+	legend("⌫", [0, 0], 8)
 	2uh()
 	stabilized(vertical=true, type="cherry_stabilizer")
 	rotated()
