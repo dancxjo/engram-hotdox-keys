@@ -35,7 +35,7 @@ export async function processKeys(inclusionPattern: RegExp = /.+/, batchSize = 5
 
     const scad = bars.create(filteredKeys.length, 0, { task: filteredKeys[0].id });
     const stl = bars.create(filteredKeys.length, 0, { task: 'Converting to STL' }, {
-        format: `{bar} {value}/{total} | ETA: {eta}s | {percentage}% | In queue: {jobsInQueue}/${batchSize} | Left to queue: {jobsLeft} | {task}`,
+        format: `{bar} {value}/{total} | ETA: {eta}s | {percentage}% | Processing: {jobsInQueue}/${batchSize} | Queued: {jobsLeft} | {task}`,
     });
 
     for (const [i, key] of filteredKeys.entries()) {
