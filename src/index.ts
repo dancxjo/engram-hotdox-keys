@@ -24,7 +24,7 @@ const options = yargs(hideBin(process.argv))
     .option('batchSize', {
         alias: 'b',
         type: 'number',
-        default: cpus().length / 2,
+        default: Math.floor(cpus().length - 1),
         description: 'Number of keys to convert at once'
     })
     .parseSync();
