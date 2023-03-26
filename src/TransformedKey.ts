@@ -27,4 +27,12 @@ export class TransformedKey extends Key {
     get row(): Row {
         return this.base.row;
     }
+
+    get font(): string | undefined {
+        return this.base.font;
+    }
+
+    set font(font: string | undefined) {
+        if (font) this.base.setFont(font);
+    }
 }

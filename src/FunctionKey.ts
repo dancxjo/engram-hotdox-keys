@@ -6,6 +6,10 @@ export class FunctionKey extends TransformedKey {
         super(base, [`legend("${level3}", [0.8, 1.1], ${fontSize3})`]);
     }
 
+    get necessaryCharacters(): string {
+        return this.base.necessaryCharacters + this.level3;
+    }
+
     size3(size: number): Key {
         this.fontSize3 = size;
         return this;

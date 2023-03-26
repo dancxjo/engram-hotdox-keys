@@ -8,6 +8,10 @@ export class Level2Key extends Level1Key {
         super(level1, row, id);
     }
 
+    get necessaryCharacters(): string {
+        return super.necessaryCharacters + this.level2;
+    }
+
     get transformations(): string[] {
         const fontSize2 = this.fontSize2 ?? Math.floor(this.fontSize * 0.85);
         return [

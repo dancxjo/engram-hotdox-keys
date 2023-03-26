@@ -1,6 +1,6 @@
 include <../../KeyV2/includes.scad>;
 $inset_legend_depth = 0.97;
-$font="DejaVu Sans:style=bold";
+$font="NotoSans:style=Bold";
 
 $inverted_dish=true; $dish_type="sideways cylindrical";
 

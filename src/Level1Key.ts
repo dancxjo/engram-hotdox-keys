@@ -10,6 +10,10 @@ export class Level1Key extends Key {
         this.id = id || level1;
     }
 
+    get necessaryCharacters(): string {
+        return this.level1;
+    }
+
     get transformations(): string[] {
         return [
             `legend("${this.level1}", [0, 0], ${this.fontSize})`

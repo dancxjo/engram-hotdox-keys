@@ -2,28 +2,62 @@ import { linkSync, writeFileSync, lstatSync } from 'fs';
 import { mkdirpSync as mkdirp } from "mkdirp";
 import { ChildProcess, exec, execSync, spawn } from 'child_process';
 import { Row, rowToNumber } from './Row';
+import { Typeface } from './Font';
 
 export abstract class Key {
     static rounding = false;
     abstract id: string;
     abstract transformations: string[];
     abstract row: Row;
+    private _font?: string;
+    
+    get font(): string | undefined {
+        return this._font;
+    }
+    
+    protected set font(font: string | undefined) {
+        this._font = font;
+    }
+    
     get header(): string {
         return `include <../../KeyV2/includes.scad>;
 $inset_legend_depth = 0.97;
-$font="DejaVu Sans:style=bold";\n`;
+$font="${this.font}";\n`;
+    }
+
+    get necessaryCharacters(): string {
+        return '';
+    }
+
+    async determineFont(): Promise<void> {
+        const defaultFont = 'DejaVu Sans:style=Bold';
+        const characters = this.necessaryCharacters;
+        const fonts = await Typeface.fetchedFonts;
+        for (const font of fonts) {
+            if (font.supports(characters)) {
+                this.font = font.getScadSpecifier('Bold') ?? defaultFont;
+                return;
+            }
+        }
+
+        this.font = defaultFont;
     }
 
     get coda(): string {
         return ``;
     }
 
-    getScad(): string {
+    setFont(font: string): typeof this {
+        this.font = font;
+        return this;
+    }
 
+    getScad(): string {
         const transformations = [
             `box_cherry(0.5)`,
             `dsa_row(${rowToNumber(this.row)})`,
             `bar_support()`,
+            // `upside_down()`,
             ...this.transformations,
             'key();'
         ];
@@ -39,7 +73,10 @@ $font="DejaVu Sans:style=bold";\n`;
         ].join('\n');
     }
 
-    writeScadFile(): void {
+    async writeScadFile(): Promise<void> {
+        if (!this.font) {
+            await this.determineFont();
+        }
         mkdirp('./scad');
         writeFileSync(`./scad/${this.id}.scad`, this.getScad());
     }

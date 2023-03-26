@@ -3,6 +3,8 @@ import { hideBin } from "yargs/helpers";
 import { processKeys, processKeysSync } from "./process";
 import { Key } from "./Key";
 import { cpus } from "os";
+import { Typeface } from "./Font";
+import { fontsDetermined, keys } from "./layout";
 
 const options = yargs(hideBin(process.argv))
     .option('match', {
@@ -29,15 +31,13 @@ const options = yargs(hideBin(process.argv))
     })
     .parseSync();
 
-Key.rounding = options.rounding ?? false;
-const pattern = options.match ? new RegExp(options.match) : undefined;
 
-if (options.sync) {
-    processKeysSync(pattern);
-} else {
-    processKeys(pattern, options.batchSize).catch((errors: Error[]) => {
-        for (const error of errors) {
-            console.error(error);
-        }
-    });
+async function main() {
+    Key.rounding = options.rounding ?? false;
+    const pattern = options.match ? new RegExp(options.match) : undefined;
+    await fontsDetermined.then(() => console.log('Fonts determined'))
+    const willProcess = options.sync ? processKeysSync(pattern) :  processKeys(pattern, options.batchSize);
+    await willProcess;
 }
+
+main().catch(e => console.error(e)).finally(() => console.log('Done!'));
