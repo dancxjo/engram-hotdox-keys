@@ -35,21 +35,19 @@ export async function processKeys(inclusionPattern: RegExp = /.+/, batchSize = 5
 
     const scad = bars.create(filteredKeys.length, 0, { task: filteredKeys[0].id });
     const stl = bars.create(filteredKeys.length, 0, { task: 'Converting to STL' }, {
-        format: `{bar} {value}/{total} | ETA: {eta}s | {percentage}% | {jobsQueued}/${batchSize} | {jobsLeft} | {task}`,
+        format: `{bar} {value}/{total} | ETA: {eta}s | {percentage}% | {jobsInQueue}/${batchSize} | {jobsLeft} | {task}`,
     });
 
     for (const [i, key] of filteredKeys.entries()) {
         scad.update(i, { task: `${key.id}.scad` })
         key.writeScadFile();
         scad.increment();
-        stl.update(0, { task: `Converting ${key.id}.stl`, jobsQueued: Object.keys(jobQueue).length, jobsLeft: Object.keys(jobs).length });
+        stl.update(0, { task: `Converting ${key.id}.stl` });
         jobs[key.id] = (async () => {
             try {
                 await key.convert();
                 stl.increment({
                     task: `Finished ${key.id}.stl`,
-                    jobsQueued: Object.keys(jobQueue).length,
-                    jobsLeft: Object.keys(jobs).length,
                 });
                 delete jobQueue[key.id];
             } catch (e) {
@@ -61,6 +59,11 @@ export async function processKeys(inclusionPattern: RegExp = /.+/, batchSize = 5
     const timer = setInterval(() => {
         const jobsLeft = Object.keys(jobs).length;
         const jobsInQueue = Object.keys(jobQueue).length;
+        const progress = stl.getProgress();
+        stl.update(progress, {
+            jobsInQueue,
+            jobsLeft,
+        });
         debug(`Jobs left: ${jobsLeft}, Jobs in queue: ${jobsInQueue}`)
         if (jobsLeft === 0 && jobsInQueue === 0) {
             debug(`Finished processing ${filteredKeys.length} keys.`)
