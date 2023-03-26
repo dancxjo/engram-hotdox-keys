@@ -35,16 +35,20 @@ export async function processKeys(inclusionPattern: RegExp = /.+/, batchSize = 5
 
     const scad = bars.create(filteredKeys.length, 0, { task: filteredKeys[0].id });
     const stl = bars.create(filteredKeys.length, 0, { task: 'Converting to STL' }, {
-        format: `{bar} {value}/{total} | ETA: {eta}s | {percentage}% | {jobsInQueue}/${batchSize} | {jobsLeft} | {task}`,
+        format: `{bar} {value}/{total} | ETA: {eta}s | {percentage}% | In queue: {jobsInQueue}/${batchSize} | Left to queue: {jobsLeft} | {task}`,
     });
 
     for (const [i, key] of filteredKeys.entries()) {
         scad.update(i, { task: `${key.id}.scad` })
         key.writeScadFile();
         scad.increment();
-        stl.update(0, { task: `Converting ${key.id}.stl` });
+        stl.update(0);
         jobs[key.id] = (async () => {
             try {
+                const progress = stl.getProgress();
+                stl.update(progress, {
+                    task: `Converting ${key.id}...`,
+                });
                 await key.convert();
                 stl.increment({
                     task: `Finished ${key.id}.stl`,
