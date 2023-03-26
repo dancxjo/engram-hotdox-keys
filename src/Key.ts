@@ -10,7 +10,7 @@ export abstract class Key {
     abstract row: Row;
     get header(): string {
         return `include <../../KeyV2/includes.scad>;
-$inset_legend_depth = 4;
+$inset_legend_depth = 0.97;
 $font="DejaVu Sans:style=bold";\n`;
     }
 

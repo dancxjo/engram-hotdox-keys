@@ -34,16 +34,23 @@ export async function processKeys(inclusionPattern: RegExp = /.+/, batchSize = 5
     }, Presets.shades_grey);
 
     const scad = bars.create(filteredKeys.length, 0, { task: filteredKeys[0].id });
-    const stl = bars.create(filteredKeys.length, 0, { task: 'Converting to STL' });
+    const stl = bars.create(filteredKeys.length, 0, { task: 'Converting to STL' }, {
+        format: `{bar} {value}/{total} | ETA: {eta}s | {percentage}% | {jobsQueued}/${batchSize} | {jobsLeft} | {task}`,
+    });
 
     for (const [i, key] of filteredKeys.entries()) {
         scad.update(i, { task: `${key.id}.scad` })
         key.writeScadFile();
         scad.increment();
+        stl.update(0, { task: `Converting ${key.id}.stl`, jobsQueued: Object.keys(jobQueue).length, jobsLeft: Object.keys(jobs).length });
         jobs[key.id] = (async () => {
             try {
                 await key.convert();
-                stl.increment({ task: `Finished ${key.id}.stl` });
+                stl.increment({
+                    task: `Finished ${key.id}.stl`,
+                    jobsQueued: Object.keys(jobQueue).length,
+                    jobsLeft: Object.keys(jobs).length,
+                });
                 delete jobQueue[key.id];
             } catch (e) {
                 errors.push(e instanceof Error ? e : new Error(JSON.stringify(e)));
@@ -77,7 +84,7 @@ export async function processKeys(inclusionPattern: RegExp = /.+/, batchSize = 5
         debug(`Starting job ${nextJobKey}...`)
         delete jobs[nextJobKey];
         jobQueue[nextJobKey] = nextJob();
-    }, 10000);
+    }, 1000);
 
 }
 
