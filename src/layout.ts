@@ -55,7 +55,7 @@ export const keys: Key[] = [
   new Spacebar(Row.Thumbs),
   new ExtraTallKey(new PlainSymbolKey("↵", Row.Thumbs, "return")),
   new ExtraTallKey(new PlainSymbolKey("⌫", Row.Thumbs, "backspace").setFont('NotoSansSymbols2:style=bold')), // Glyph is quite large
-  new ExtraTallKey(new PlainSymbolKey("⎋", Row.Thumbs, "escape")),
+  new ExtraTallKey(new PlainSymbolKey("⎋", Row.Thumbs, "escape").setFont('NotoSansSymbols:style=bold')),
 
   // Thumb keys (normal height)
   new PlainSymbolKey("⇧", Row.Thumbs, "shift_left"),
