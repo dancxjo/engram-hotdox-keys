@@ -10,7 +10,6 @@ export abstract class Key {
     abstract row: Row;
     get header(): string {
         return `include <../../KeyV2/includes.scad>;
-$stem_type="box_cherry";
 $inset_legend_depth = 4;
 $font="DejaVu Sans:style=bold";\n`;
     }
@@ -22,6 +21,7 @@ $font="DejaVu Sans:style=bold";\n`;
     getScad(): string {
 
         const transformations = [
+            `box_cherry(0.5)`,
             `sa_row(${rowToNumber(this.row)})`,
             `bar_support()`,
             ...this.transformations,
@@ -64,15 +64,17 @@ $font="DejaVu Sans:style=bold";\n`;
         }
     }
 
-    convertToStl(callback: () => unknown): ChildProcess {
+    async convert(): Promise<void> {
         mkdirp('./stl');
-        return exec(`openscad-nightly -o ./stl/${this.id}.stl ./scad/${this.id}.scad`, (err, stdOut, stdErr) => {
-            if (!err) {
+        return new Promise((resolve, reject) => {
+            exec(`openscad-nightly -o ./stl/${this.id}.stl ./scad/${this.id}.scad`, (err, stdOut, stdErr) => {
+                if (err) {
+                    reject(err);
+                }
+
                 this.link();
-            } else {
-                console.error(`Couldn't convert ${this.row}/${this.id}`, err);
-            }
-            callback();
+                resolve();
+            });
         });
     }
 }

@@ -1,9 +1,10 @@
 include <../../KeyV2/includes.scad>;
-$stem_type="box_cherry";
 $inset_legend_depth = 4;
 $font="DejaVu Sans:style=bold";
 
-sa_row(2)
+box_cherry(0.5)
+	sa_row(3)
+	bar_support()
 	legend(",", [-0.4, 1], 5)
 	legend(";", [-0.4, -0.9], 4)
 	key();

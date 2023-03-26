@@ -20,6 +20,12 @@ const options = yargs(hideBin(process.argv))
         default: false,
         description: 'Run conversion asynchronously'
     })
+    .option('batchSize', {
+        alias: 'b',
+        type: 'number',
+        default: 5,
+        description: 'Number of keys to convert at once'
+    })
     .parseSync();
 
 Key.rounding = options.rounding ?? false;
@@ -28,7 +34,7 @@ const pattern = options.match ? new RegExp(options.match) : undefined;
 if (options.sync) {
     processKeysSync(pattern);
 } else {
-    processKeys(pattern).catch((errors: Error[]) => {
+    processKeys(pattern, options.batchSize).catch((errors: Error[]) => {
         for (const error of errors) {
             console.error(error);
         }

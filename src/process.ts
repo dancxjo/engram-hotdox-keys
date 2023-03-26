@@ -1,7 +1,8 @@
-import { ChildProcess } from "child_process";
 import { MultiBar, SingleBar, Presets } from "cli-progress";
 import { keys } from "./layout";
-import { Key } from "./Key";
+import Debug from "debug";
+
+const debug = Debug('process');
 
 export function processKeysSync(inclusionPattern: RegExp = /.+/): void {
     const filteredKeys = keys.filter(key => inclusionPattern.test(key.id));
@@ -20,11 +21,11 @@ export function processKeysSync(inclusionPattern: RegExp = /.+/): void {
     bar.stop();
 }
 
-export async function processKeys(inclusionPattern: RegExp = /.+/): Promise<void> {
+export async function processKeys(inclusionPattern: RegExp = /.+/, batchSize = 5): Promise<void> {
     const filteredKeys = keys.filter(key => inclusionPattern.test(key.id));
-
-    let finishedJobs = 0;
     const errors: Error[] = [];
+    const jobs: { [key: string]: (() => Promise<void>) } = {};
+    const jobQueue: { [key: string]: Promise<void> } = {};
 
     const bars = new MultiBar({
         clearOnComplete: false,
@@ -35,26 +36,48 @@ export async function processKeys(inclusionPattern: RegExp = /.+/): Promise<void
     const scad = bars.create(filteredKeys.length, 0, { task: filteredKeys[0].id });
     const stl = bars.create(filteredKeys.length, 0, { task: 'Converting to STL' });
 
-    return new Promise((resolve) => {
-        for (const [i, key] of filteredKeys.entries()) {
-            scad.update(i, { task: `${key.id}.scad` })
-            key.writeScadFile();
-            scad.increment();
-            const finish = (finishedKey: Key) => {
-                finishedJobs++;
-                stl.update(finishedJobs, { task: `Finished ${finishedKey.id}.stl` });
-                if (finishedJobs === filteredKeys.length) {
-                    bars.stop();
-                    resolve();
-                }
+    for (const [i, key] of filteredKeys.entries()) {
+        scad.update(i, { task: `${key.id}.scad` })
+        key.writeScadFile();
+        scad.increment();
+        jobs[key.id] = (async () => {
+            try {
+                await key.convert();
+                stl.increment({ task: `Finished ${key.id}.stl` });
+                delete jobQueue[key.id];
+            } catch (e) {
+                errors.push(e instanceof Error ? e : new Error(JSON.stringify(e)));
             }
+        })
+    }
 
-            const job = key.convertToStl(() => finish(key));
-            job.on('error', (error) => {
-                errors.push(error);
-                finish(key);
-            });
+    const timer = setInterval(() => {
+        const jobsLeft = Object.keys(jobs).length;
+        const jobsInQueue = Object.keys(jobQueue).length;
+        debug(`Jobs left: ${jobsLeft}, Jobs in queue: ${jobsInQueue}`)
+        if (jobsLeft === 0 && jobsInQueue === 0) {
+            debug(`Finished processing ${filteredKeys.length} keys.`)
+            errors.forEach(error => console.error(error));
+            clearInterval(timer);
+            bars.stop();
+            return;
         }
-    });
+        if (jobsInQueue >= batchSize) {
+            debug(`Job queue is full. Waiting...`)
+            return;
+        }
+
+        debug(`Starting next job...`)
+        const nextJobKey = Object.keys(jobs)[0];
+        const nextJob = jobs[nextJobKey];
+        if (!nextJob) {
+            debug(`No more jobs to start. Waiting...`)
+            return;
+        }
+        debug(`Starting job ${nextJobKey}...`)
+        delete jobs[nextJobKey];
+        jobQueue[nextJobKey] = nextJob();
+    }, 10);
+
 }
 

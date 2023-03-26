@@ -1,11 +1,12 @@
 include <../../KeyV2/includes.scad>;
-$stem_type="box_cherry";
 $inset_legend_depth = 4;
 $font="DejaVu Sans:style=bold";
 
 $inverted_dish=true; $dish_type="sideways cylindrical";
 
-sa_row(4)
+box_cherry(0.5)
+	sa_row(4)
+	bar_support()
 	legend("␣", [0, 0], 8)
 	inverted()
 	2uh()
