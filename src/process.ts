@@ -77,7 +77,7 @@ export async function processKeys(inclusionPattern: RegExp = /.+/, batchSize = 5
         debug(`Starting job ${nextJobKey}...`)
         delete jobs[nextJobKey];
         jobQueue[nextJobKey] = nextJob();
-    }, 10);
+    }, 10000);
 
 }
 
