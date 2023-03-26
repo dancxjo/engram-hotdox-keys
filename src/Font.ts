@@ -21,7 +21,7 @@ export class Typeface {
 
     protected static async fetchFonts(): Promise<Typeface[]> {
         return Promise.all([
-//            Typeface.fromGoogle("Noto Sans", "Bold"),
+            Typeface.fromGoogle("Noto Sans", "Bold"),
             Typeface.fromGoogle("Noto Sans Symbols", "VariableFont_wght"),
             Typeface.fromGoogle("Noto Sans Symbols 2", "Regular"),
         ]);
@@ -67,7 +67,7 @@ export class Typeface {
 
     getScadSpecifier(style = ""): string {
         const name = this.font.postscriptName ?? this.font.familyName;
-        const nameWithoutStyle = name.replace(/\-?(Bold|Regular|Medium)$/g, ''); 
+        const nameWithoutStyle = name.replace(/\-?(Bold|Regular|Medium)$/g, '');
         return `${nameWithoutStyle}:style=${style}`;
     }
 

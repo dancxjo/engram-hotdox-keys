@@ -49,7 +49,7 @@ export const keys: Key[] = [
   new MiddleKey(new Level2Key("/", "\\\\", Row.BelowHome, "slash")),
   new MiddleKey(new Level2Key("@", "`", Row.AboveHome, "at").size2(6)), // Backtick is too light to be seen
   new MiddleKey(new Level2Key("#", "$", Row.AboveHome, "hash")),
-  new MiddleKey(new PlainSymbolKey("⎙", Row.BelowHome, "prscr")),
+  new MiddleKey(new PlainSymbolKey("⎙", Row.BelowHome, "prscr").setFont('NotoSansSymbols:style=bold')), // Print screen
 
   // Thumb keys (extra tall)
   new Spacebar(Row.Thumbs),
