@@ -2,6 +2,7 @@ import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 import { processKeys, processKeysSync } from "./process";
 import { Key } from "./Key";
+import { cpus } from "os";
 
 const options = yargs(hideBin(process.argv))
     .option('match', {
@@ -23,7 +24,7 @@ const options = yargs(hideBin(process.argv))
     .option('batchSize', {
         alias: 'b',
         type: 'number',
-        default: 15,
+        default: cpus().length / 2,
         description: 'Number of keys to convert at once'
     })
     .parseSync();
