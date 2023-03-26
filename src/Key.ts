@@ -9,16 +9,8 @@ export abstract class Key {
     abstract id: string;
     abstract transformations: string[];
     abstract row: Row;
-    private _font?: string;
-    
-    get font(): string | undefined {
-        return this._font;
-    }
-    
-    protected set font(font: string | undefined) {
-        this._font = font;
-    }
-    
+    public font: string = 'DejaVu Sans:style=Bold';
+
     get header(): string {
         return `include <../../KeyV2/includes.scad>;
 $inset_legend_depth = 0.97;
@@ -47,7 +39,7 @@ $font="${this.font}";\n`;
         return ``;
     }
 
-    setFont(font: string): typeof this {
+    setFont(font: string): Key {
         this.font = font;
         return this;
     }

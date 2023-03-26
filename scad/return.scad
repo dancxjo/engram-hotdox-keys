@@ -1,6 +1,6 @@
 include <../../KeyV2/includes.scad>;
 $inset_legend_depth = 0.97;
-$font="NotoSans:style=Bold";
+$font="DejaVu Sans:style=Bold";
 
 box_cherry(0.5)
 	dsa_row(4)

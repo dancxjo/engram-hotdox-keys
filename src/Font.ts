@@ -21,7 +21,7 @@ export class Typeface {
 
     protected static async fetchFonts(): Promise<Typeface[]> {
         return Promise.all([
-            Typeface.fromGoogle("Noto Sans", "Bold"),
+//            Typeface.fromGoogle("Noto Sans", "Bold"),
             Typeface.fromGoogle("Noto Sans Symbols", "VariableFont_wght"),
             Typeface.fromGoogle("Noto Sans Symbols 2", "Regular"),
         ]);
