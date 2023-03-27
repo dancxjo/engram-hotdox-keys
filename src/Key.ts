@@ -13,7 +13,7 @@ export abstract class Key {
 
     get header(): string {
         return `include <../../KeyV2/includes.scad>;
-$inset_legend_depth = 0.97;
+$inset_legend_depth = 4;
 $font="${this.font}";\n`;
     }
 
@@ -47,7 +47,7 @@ $font="${this.font}";\n`;
     getScad(): string {
         const transformations = [
             `box_cherry(0.5)`,
-            `dsa_row(${rowToNumber(this.row)})`,
+            `sa_row(${rowToNumber(this.row)})`,
             `bar_support()`,
             // `upside_down()`,
             ...this.transformations,
