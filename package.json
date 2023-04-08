@@ -10,7 +10,7 @@
     "clean": "rm -rf ./stl && rm -rf ./scad && rm -rf ./rows",
     "generate": "node build/index.js",
     "start": "npm run clean && npm run generate",
-    "prestart": "npm run build"
+    "pregenerate": "npm run build"
   },
   "author": "Travis Reed (@dancxjo)",
   "license": "UNLICENSED",

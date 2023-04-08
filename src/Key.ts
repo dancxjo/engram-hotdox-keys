@@ -39,7 +39,7 @@ $font="${this.font}";\n`;
         return ``;
     }
 
-    setFont(font: string): Key {
+    setFont(font: string): typeof this {
         this.font = font;
         return this;
     }
@@ -48,7 +48,7 @@ $font="${this.font}";\n`;
         const transformations = [
             `box_cherry(0.5)`,
             `sa_row(${rowToNumber(this.row)})`,
-            `bar_support()`,
+            // `bar_support()`,
             // `upside_down()`,
             ...this.transformations,
             'key();'

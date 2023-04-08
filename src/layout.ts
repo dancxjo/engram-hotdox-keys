@@ -47,14 +47,14 @@ export const keys: Key[] = [
 
   // Middle keys
   new MiddleKey(new Level2Key("/", "\\\\", Row.BelowHome, "slash")),
-  new MiddleKey(new Level2Key("@", "`", Row.AboveHome, "at").size2(6)), // Backtick is too light to be seen
+  new MiddleKey(new Level2Key("@", "`", Row.AboveHome, "at").size2(12)), // Backtick is too light to be seen
   new MiddleKey(new Level2Key("#", "$", Row.AboveHome, "hash")),
   new MiddleKey(new PlainSymbolKey("⎙", Row.BelowHome, "prscr").setFont('NotoSansSymbols:style=bold')), // Print screen
 
   // Thumb keys (extra tall)
   new Spacebar(Row.Thumbs),
   new ExtraTallKey(new PlainSymbolKey("↵", Row.Thumbs, "return")),
-  new ExtraTallKey(new PlainSymbolKey("⌫", Row.Thumbs, "backspace").setFont('NotoSansSymbols2:style=bold')), // Glyph is quite large
+  new ExtraTallKey(new PlainSymbolKey("⌫", Row.Thumbs, "backspace").setFont('DejaVuSans:style=bold').size(6)), // Glyph is quite large
   new ExtraTallKey(new PlainSymbolKey("⎋", Row.Thumbs, "escape").setFont('NotoSansSymbols:style=bold')),
 
   // Thumb keys (normal height)
@@ -64,7 +64,7 @@ export const keys: Key[] = [
   new PlainSymbolKey("⇟", Row.Thumbs, "pagedown"),
   new PlainSymbolKey("↖", Row.Thumbs, "home"),
   new PlainSymbolKey("↘", Row.Thumbs, "end"),
-  new PlainSymbolKey("⌦", Row.Thumbs, "delete").setFont('NotoSansSymbols2:style=bold'),
+  new PlainSymbolKey("⌦", Row.Thumbs, "delete").setFont('DejaVuSans:style=bold').size(6),
   new PlainSymbolKey("⎀", Row.Thumbs, "insert"),
   // Side keys
   new SideKey(new PlainSymbolKey("⇧", Row.BelowHome, "shift_pseudo_left")),

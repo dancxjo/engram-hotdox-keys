@@ -5,9 +5,8 @@ $font="DejaVu Sans:style=Bold";
 rounded()
 	box_cherry(0.5)
 	sa_row(2)
-	bar_support()
 	legend("@", [-0.4, 1], 5)
-	legend("`", [-0.4, -0.9], 6)
+	legend("`", [-0.4, -0.9], 12)
 	1_5uh()
 	rotated()
 	key();

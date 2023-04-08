@@ -21,7 +21,9 @@ export class Typeface {
 
     protected static async fetchFonts(): Promise<Typeface[]> {
         return Promise.all([
-            Typeface.fromGoogle("Noto Sans", "Bold"),
+            // DejaVu Sans is a little thicker and more legible than Noto Sans
+            // Typeface.fromGoogle("Noto Sans", "Bold"),
+            new Typeface("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"),
             Typeface.fromGoogle("Noto Sans Symbols", "VariableFont_wght"),
             Typeface.fromGoogle("Noto Sans Symbols 2", "Regular"),
         ]);
